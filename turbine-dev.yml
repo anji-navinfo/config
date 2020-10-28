@@ -1,0 +1,16 @@
+server:
+  port: 8989
+management: 
+  server:
+    port: 8990
+turbine:
+# 需要监控的应用名称，默认逗号隔开，内部使用Stringutils.commaDelimitedListToStringArray分割
+  app-config: myclouds-register,myclouds-gateway,myclouds-config,ajwl-base
+  aggregator:
+    cluster-config:
+    - default
+  # 集群名称
+  cluster-name-expression: new String("default")
+  # true 同一主机上的服务通过host和port的组合来进行区分，默认为true
+# false 时 在本机测试时 监控中host集群数会为1了 因为本地host是一样的
+  combine-host-port: true
