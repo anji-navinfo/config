@@ -1,0 +1,42 @@
+spring:
+  servlet:
+    multipart:
+      location: /mydata/myclouds_upload_tmp
+zuul:
+  host:
+    socket-timeout-millis: 90000 #HTTP连接超时要比Hystrix的大
+    connect-timeout-millis: 30000 #socket超时 
+  # 设置忽略的服务，即配置后将不会被路由（但对于明确配置在路由中的，将不会被忽略）
+  #ignored-services: '*'
+  #ignoreSecurityHeaders: false
+  #多次请求的时候，会把这些header再带过来，然后请求zuul转发的接口又在写入一次，造成重复了，方案就是zuul转发的时候，过滤掉这些header
+  ssl-hostname-validation-enabled: false
+  routes:
+    oilPlatform:
+      #防止header出现双重Access-Control-Allow-Origin,Access-Control-Allow-Methods，进行过滤
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      path: /oilPlatform/**
+      service-id: myclouds-oilPlatform
+    easyMaintenance:
+      #防止header出现双重Access-Control-Allow-Origin,Access-Control-Allow-Methods，进行过滤
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      path: /easyMaintenance/**
+      service-id: myclouds-easyMaintenance
+    information:
+      #防止header出现双重Access-Control-Allow-Origin,Access-Control-Allow-Methods，进行过滤
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      path: /information/**
+      service-id: myclouds-masterFileSetup
+ribbon:        #设置ribbon的超时时间小于zuul的超时时间
+  ReadTimeout: 25000 #用来设置路由转发请求的超时时间
+  ConnectTimeout: 3000 #设置路由转发请求的时候，创建请求连接的超时时间
+hystrix:
+  command:
+    default: #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enable: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 #断路器超时时间，默认1000ms 设置API网关中路由转发请求的HystrixCommand执行超时时间

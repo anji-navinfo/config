@@ -1,0 +1,20 @@
+ftp:
+   ip: 10.45.16.8
+   #user: root
+   #password: TZb..:ro1Q3eKW5W%$
+   user: fileUpload
+   password: m8Bs%l46kJsL^9FGlo
+   port: 22
+   directory: /mydata/ftp
+uploadFile:
+  url: http://gvm.sijibang.club/gvmImages
+  driver_gvm:
+    path: /gvm_driver/
+  manage_gvm:
+    path: /gvm_manage/
+  carrier_gvm:
+    path: /gvm_carrier/
+
+server:
+  tomcat:
+    basedir: /app/temp

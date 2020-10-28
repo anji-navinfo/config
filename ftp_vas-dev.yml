@@ -1,0 +1,14 @@
+ftp:
+   ip: 114.86.225.248
+   user: root
+   password: Anji 1601
+   port: 8088
+   directory: /mydata/ftp
+uploadFile:
+  url: http://test-gvm-image.sijibang.club:58000/vasImages
+  driver_gvm:
+    path: /oilPlatform/
+  manage_gvm:
+    path: /easyMaintenance/
+  carrier_gvm:
+    path: /information/
