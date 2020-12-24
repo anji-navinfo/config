@@ -8,12 +8,12 @@ ftp:
    directory: /mydata/ftp
 uploadFile:
   url: http://gvm.sijibang.club/gvmImages
-  driver_gvm:
-    path: /gvm_driver/
-  manage_gvm:
-    path: /gvm_manage/
-  carrier_gvm:
-    path: /gvm_carrier/
+  oilPlatform: #惠家油图片路径
+    path: oilPlatform/
+  masterFileSetup: #基础信息图片路径
+    path: masterFileSetup/
+  easyMaintenance: #易维修图片路径
+    path: easyMaintenance/
 
 server:
   tomcat:
