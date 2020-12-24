@@ -12,11 +12,16 @@ zuul:
   #多次请求的时候，会把这些header再带过来，然后请求zuul转发的接口又在写入一次，造成重复了，方案就是zuul转发的时候，过滤掉这些header
   ssl-hostname-validation-enabled: false
   routes:
-        oilPlatform:
+     oilPlatform:
       #防止header出现双重Access-Control-Allow-Origin,Access-Control-Allow-Methods，进行过滤
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
       path: /oilPlatform/**
       service-id: myclouds-oilPlatform
+     myclouds-oilH5:
+      #防止header出现双重Access-Control-Allow-Origin,Access-Control-Allow-Methods，进行过滤
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
+      path: /myclouds-oilH5/**
+      service-id: myclouds-oilH5
     easyMaintenance:
       #防止header出现双重Access-Control-Allow-Origin,Access-Control-Allow-Methods，进行过滤
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Methods
